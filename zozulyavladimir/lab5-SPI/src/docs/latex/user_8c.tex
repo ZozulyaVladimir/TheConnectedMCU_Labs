@@ -1,0 +1,124 @@
+\hypertarget{user_8c}{}\section{user.\+c File Reference}
+\label{user_8c}\index{user.\+c@{user.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}user.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/attribs.\+h$>$}\newline
+{\ttfamily \#include $<$proc/p32mz2048efg100.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}A\+D\+C.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{user_8c_af4c904c48cffb15c04e3c5419020cebb}{Delay\+Ms} (int t)
+\item 
+void \hyperlink{user_8c_afe7a49ab9879bd7044b35eb779f30712}{Init\+G\+P\+IO} (void)
+\item 
+void \hyperlink{user_8c_a4fc01d736fe50cf5b977f755b675f11d}{setup} ()
+\item 
+void \hyperlink{user_8c_a8c50659733df2acac1580d209db8e97f}{oled\+\_\+init} ()
+\item 
+void \hyperlink{user_8c_a56c5cf8a568cff737ff95520cbe6b405}{draw} ()
+\item 
+void \hyperlink{user_8c_ac3bdbc826d19fb41ffb25470527c3801}{input} ()
+\item 
+void \hyperlink{user_8c_a891ab028bd00ce90bbf291a355410e1e}{logic} ()
+\item 
+void \hyperlink{user_8c_aeeea2a2dd7d5ac6064bd84e9571ea8c1}{set\+\_\+leds} (int32\+\_\+t leds)
+\item 
+void \hyperlink{user_8c_a26a7d62fe33f9e4e5139f552f301232a}{led\+\_\+test} (void)
+\item 
+void \hyperlink{user_8c_a1377ccdc5d082003aa77d5ef7831f7d8}{init\+Timer2\+And\+I\+C3} (void)
+\item 
+void \hyperlink{user_8c_ae3bbac13eb9f980cdc844a2ccec6c978}{\+\_\+\+\_\+\+I\+SR} (\+\_\+\+I\+N\+P\+U\+T\+\_\+\+C\+A\+P\+T\+U\+R\+E\+\_\+3\+\_\+\+V\+E\+C\+T\+OR, I\+P\+L2\+S\+RS)
+\item 
+void \hyperlink{user_8c_ac33652401561bede6a56b8ff6f9cc16f}{Oled\+Clear} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{user_8h_a31793e4efbb182e74f29154fb352f2a5}{e\+Direction} \hyperlink{user_8c_af8e24808c06ae1d8f5c98e25e030dfb8}{dir}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{user_8c_ae3bbac13eb9f980cdc844a2ccec6c978}\label{user_8c_ae3bbac13eb9f980cdc844a2ccec6c978}} 
+\index{user.\+c@{user.\+c}!\+\_\+\+\_\+\+I\+SR@{\+\_\+\+\_\+\+I\+SR}}
+\index{\+\_\+\+\_\+\+I\+SR@{\+\_\+\+\_\+\+I\+SR}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+\+I\+S\+R()}{\_\_ISR()}}
+{\footnotesize\ttfamily void \+\_\+\+\_\+\+I\+SR (\begin{DoxyParamCaption}\item[{\+\_\+\+I\+N\+P\+U\+T\+\_\+\+C\+A\+P\+T\+U\+R\+E\+\_\+3\+\_\+\+V\+E\+C\+T\+OR}]{,  }\item[{I\+P\+L2\+S\+RS}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_af4c904c48cffb15c04e3c5419020cebb}\label{user_8c_af4c904c48cffb15c04e3c5419020cebb}} 
+\index{user.\+c@{user.\+c}!Delay\+Ms@{Delay\+Ms}}
+\index{Delay\+Ms@{Delay\+Ms}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{Delay\+Ms()}{DelayMs()}}
+{\footnotesize\ttfamily void Delay\+Ms (\begin{DoxyParamCaption}\item[{int}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a56c5cf8a568cff737ff95520cbe6b405}\label{user_8c_a56c5cf8a568cff737ff95520cbe6b405}} 
+\index{user.\+c@{user.\+c}!draw@{draw}}
+\index{draw@{draw}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_afe7a49ab9879bd7044b35eb779f30712}\label{user_8c_afe7a49ab9879bd7044b35eb779f30712}} 
+\index{user.\+c@{user.\+c}!Init\+G\+P\+IO@{Init\+G\+P\+IO}}
+\index{Init\+G\+P\+IO@{Init\+G\+P\+IO}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{Init\+G\+P\+I\+O()}{InitGPIO()}}
+{\footnotesize\ttfamily void Init\+G\+P\+IO (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a1377ccdc5d082003aa77d5ef7831f7d8}\label{user_8c_a1377ccdc5d082003aa77d5ef7831f7d8}} 
+\index{user.\+c@{user.\+c}!init\+Timer2\+And\+I\+C3@{init\+Timer2\+And\+I\+C3}}
+\index{init\+Timer2\+And\+I\+C3@{init\+Timer2\+And\+I\+C3}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{init\+Timer2\+And\+I\+C3()}{initTimer2AndIC3()}}
+{\footnotesize\ttfamily void init\+Timer2\+And\+I\+C3 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_ac3bdbc826d19fb41ffb25470527c3801}\label{user_8c_ac3bdbc826d19fb41ffb25470527c3801}} 
+\index{user.\+c@{user.\+c}!input@{input}}
+\index{input@{input}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{input()}{input()}}
+{\footnotesize\ttfamily void input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a26a7d62fe33f9e4e5139f552f301232a}\label{user_8c_a26a7d62fe33f9e4e5139f552f301232a}} 
+\index{user.\+c@{user.\+c}!led\+\_\+test@{led\+\_\+test}}
+\index{led\+\_\+test@{led\+\_\+test}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{led\+\_\+test()}{led\_test()}}
+{\footnotesize\ttfamily void led\+\_\+test (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a891ab028bd00ce90bbf291a355410e1e}\label{user_8c_a891ab028bd00ce90bbf291a355410e1e}} 
+\index{user.\+c@{user.\+c}!logic@{logic}}
+\index{logic@{logic}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{logic()}{logic()}}
+{\footnotesize\ttfamily void logic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a8c50659733df2acac1580d209db8e97f}\label{user_8c_a8c50659733df2acac1580d209db8e97f}} 
+\index{user.\+c@{user.\+c}!oled\+\_\+init@{oled\+\_\+init}}
+\index{oled\+\_\+init@{oled\+\_\+init}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{oled\+\_\+init()}{oled\_init()}}
+{\footnotesize\ttfamily void oled\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_ac33652401561bede6a56b8ff6f9cc16f}\label{user_8c_ac33652401561bede6a56b8ff6f9cc16f}} 
+\index{user.\+c@{user.\+c}!Oled\+Clear@{Oled\+Clear}}
+\index{Oled\+Clear@{Oled\+Clear}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{Oled\+Clear()}{OledClear()}}
+{\footnotesize\ttfamily void Oled\+Clear (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_aeeea2a2dd7d5ac6064bd84e9571ea8c1}\label{user_8c_aeeea2a2dd7d5ac6064bd84e9571ea8c1}} 
+\index{user.\+c@{user.\+c}!set\+\_\+leds@{set\+\_\+leds}}
+\index{set\+\_\+leds@{set\+\_\+leds}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{set\+\_\+leds()}{set\_leds()}}
+{\footnotesize\ttfamily void set\+\_\+leds (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{leds }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{user_8c_a4fc01d736fe50cf5b977f755b675f11d}\label{user_8c_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{user.\+c@{user.\+c}!setup@{setup}}
+\index{setup@{setup}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{user_8c_af8e24808c06ae1d8f5c98e25e030dfb8}\label{user_8c_af8e24808c06ae1d8f5c98e25e030dfb8}} 
+\index{user.\+c@{user.\+c}!dir@{dir}}
+\index{dir@{dir}!user.\+c@{user.\+c}}
+\subsubsection{\texorpdfstring{dir}{dir}}
+{\footnotesize\ttfamily enum \hyperlink{user_8h_a31793e4efbb182e74f29154fb352f2a5}{e\+Direction} dir}
+
