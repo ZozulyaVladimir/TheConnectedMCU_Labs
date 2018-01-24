@@ -1,4 +1,3 @@
-
 /************************************************************************/
 /*                                                                      */
 /*        TCPEchoClient                                                 */
@@ -88,11 +87,6 @@
 #include <ArduinoJson.h>
 #include <LiquidCrystal.h>
 
-#define OLED_MOSI   11
-#define OLED_CLK    13
-#define OLED_DC     39
-#define OLED_CS     38
-#define OLED_RESET  10
 LiquidCrystal display(41,40,39,38,37,36);
 /************************************************************************/
 /*                                                                      */
@@ -101,17 +95,15 @@ LiquidCrystal display(41,40,39,38,37,36);
 /************************************************************************/
 
 
-  char * szIPServer = "https://timezoneapi.io";    //server to connect to
-uint16_t portServer = 80  
-;
+char * szIPServer = "176.9.107.169";    //server to connect to
+uint16_t portServer = 80;
 
 // Specify the SSID
-const char * szSsid = "TP 3.1";
+const char * szSsid = "Redmik";
 
 // select 1 for the security you want, or none for no security
 #define USE_WPA2_PASSPHRASE
 //#define USE_WPA2_KEY
-
 //#define USE_WEP40
 //#define USE_WEP104
 //#define USE_WF_CONFIG_H
@@ -119,7 +111,7 @@ const char * szSsid = "TP 3.1";
 // modify the security key to what you have.
 #if defined(USE_WPA2_PASSPHRASE)
 
-const char * szPassPhrase = "azovskaya_15a";
+const char * szPassPhrase = "12345678";
 #define WiFiConnectMacro() deIPcK.wfConnect(szSsid, szPassPhrase, &status)
 
 #elif defined(USE_WPA2_KEY)
@@ -183,10 +175,11 @@ unsigned tWait = 30000;
 TCPSocket tcpSocket;
 byte rgbRead[1024];
 
-byte rgbWriteStream[] = "GET /api/timezone/?Europe/Paris\nHost: timezoneapi.io\nConnection: close\n";
+byte rgbWriteStream[] = "GET /timezoneJSON?formatted=true&lat=50.27&lng=30.31&username=fnolejr&style=full\n";
 int cbWriteStream = sizeof(rgbWriteStream);
 
-const char *name;
+const char *sunrise;
+const char *sunset;
 const char *time;
 
 /***        void setup()
@@ -209,9 +202,7 @@ const char *time;
  * ------------------------------------------------------------ */
 void setup()
 {
-    Serial.begin(9600);
-    Serial.print("WiFiTCPEchoClient 3.0");
-    Serial.print("Digilent, Copyright 2014");
+    pinMode(35,INPUT_PULLDOWN);
 
     display.begin(20,4);
     display.clear();
@@ -241,7 +232,7 @@ void setup()
  *      This code will write  some stings to the server and have the server echo it back
  *      
  * ------------------------------------------------------------ */
-void loop() {
+void request() {
     IPSTATUS status;
     int cbRead = 0;
 
@@ -250,8 +241,8 @@ void loop() {
 
         case CONNECT:
             if(WiFiConnectMacro())
+            
             {
-               // Serial.print("WiFi connected");
                 display.setCursor(0,0);
                 display.clear();
                 display.print("Connected to ");
@@ -267,7 +258,8 @@ void loop() {
                 //Serial.print(status, DEC);
                 display.setCursor(0,0);
                 display.clear();
-                display.print("Unable to connection, status: ");
+                display.print("Unable to connection status: ");
+                display.setCursor(0,3);
                 display.print(status, DEC);
                 display.display();
                 delay(500);
@@ -278,12 +270,11 @@ void loop() {
         case TCPCONNECT:
             if(deIPcK.tcpConnect(szIPServer, portServer, tcpSocket))
             {
-                //Serial.print("Connected to server.");
                 display.setCursor(0,0);
                 display.clear();
                 display.print("Getting time from server");
+                delay(500);
                 display.display();
-                delay(2000);
                 state = WRITE;
             }
         break;
@@ -293,12 +284,11 @@ void loop() {
             if(tcpSocket.isEstablished())
             {     
                 tcpSocket.writeStream(rgbWriteStream, cbWriteStream);
- 
-                //Serial.print("Bytes Read Back:");
                 state = READ;
                 tStart = (unsigned) millis();
             }
             break;
+
 
             // look for the echo back
         case READ:
@@ -307,21 +297,14 @@ void loop() {
             {
                 cbRead = cbRead < (int) sizeof(rgbRead) ? cbRead : sizeof(rgbRead);
                 cbRead = tcpSocket.readStream(rgbRead, cbRead);
-
-                for(int i=0; i < cbRead; i++)
-                {
-                    Serial.print((char) rgbRead[i]);
-                }
+  
                 json_parse();
-                displ_weather();
+                print_time_lcd();
             }
 
             // give us some time to get everything echo'ed back
             else if( (((unsigned) millis()) - tStart) > tWait )
             {
-                
-              
-              Serial.print("");
                 state = CLOSE;
             }
             break;
@@ -329,11 +312,11 @@ void loop() {
         // done, so close up the tcpSocket
         case CLOSE:
             tcpSocket.close();
-            Serial.print("Closing TcpClient, Done with sketch.");
             state = TCPCONNECT;
             break;
 
         case DONE:
+                
         default:
             break;
     }
@@ -342,64 +325,50 @@ void loop() {
     DEIPcK::periodicTasks();
 }
 
-void displ_weather(void) {
+void loop(){
+    if(digitalRead(35)){
+       request(); 
+    }
+}
+
+void print_time_lcd(void) {
 
     display.setCursor(0,0);
     display.clear();
-    display.print("Country name: ");
-    display.print(name);
+    display.print("sunrise: ");
+    display.setCursor(0,1);
+    display.print(sunrise);
      delay(2000);
      
-       display.setCursor(0,0);
+    display.setCursor(0,0);
     display.clear();
-    display.print("Time: ");
+    display.print("sunset: ");
+    display.setCursor(0,1);
+    display.print(sunset);
+     delay(2000);
+    
+    display.setCursor(0,0);
+    display.clear();
+    display.print("time: ");
+    display.setCursor(0,1);
     display.print(time);
      delay(2000);
-     
-    display.display();
-    delay(2000);
 
 }
 
 void json_parse() {
-    // Memory pool for JSON object tree.
-    //
-    // Inside the brackets, 200 is the size of the pool in bytes.
-    // Don't forget to change this value to match your JSON document.
-    // Use arduinojson.org/assistant to compute the capacity.
     StaticJsonBuffer<1200> jsonBuffer;
-    // StaticJsonBuffer allocates memory on the stack, it can be
-    // replaced by DynamicJsonBuffer which allocates in the heap.
-    //
-    // DynamicJsonBuffer  jsonBuffer(200);
-  
-    // JSON input string.
-    //
-    // It's better to use a char[] as shown here.
-    // If you use a const char* or a String, ArduinoJson will
-    // have to make a copy of the input in the JsonBuffer.
-    //char json[] =
-    //    "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
-    // Root of the object tree.
-    //
-    // It's a reference to the JsonObject, the actual bytes are inside the
-    // JsonBuffer with all the other nodes of the object tree.
-    // Memory is freed when jsonBuffer goes out of scope.
     JsonObject& root = jsonBuffer.parseObject((char*)rgbRead);
   
-    // Test if parsing succeeds.
     if (!root.success()) {
-
           display.setCursor(0,0);
           display.clear();
           display.print("Eror in json. Check response.");  
           delay(2000);
-    
       return;
     }
-  
-    name = root["data"]["timezone"]["country_name"];
-    time = root["data"]["datetime"]["date_time_txt"];
-    
+    sunrise = root["sunrise"];
+    sunset = root["sunset"];
+    time = root["time"];
 }
 
